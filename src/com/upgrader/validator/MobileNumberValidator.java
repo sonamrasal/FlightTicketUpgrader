@@ -1,10 +1,11 @@
 package com.upgrader.validator;
 
-public class MobileNumberValidator {
+public class MobileNumberValidator /* implements Validator */ {
 
-	public boolean validate(String mobileNumber) {
-		return isNumeric(mobileNumber) && isValidLength(mobileNumber);
-	}
+	/*
+	 * @Override public boolean validate(String mobileNumber) { return
+	 * isNumeric(mobileNumber) && isValidLength(mobileNumber); }
+	 */
 
 	public boolean isNumeric(String mobileNumber) {
 		return mobileNumber.matches("^[0-9]*$");

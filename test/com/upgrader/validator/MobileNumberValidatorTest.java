@@ -22,11 +22,11 @@ public class MobileNumberValidatorTest {
 		assertTrue(validator.isNumeric("9823014600"));
 	}
 	
-	@Test
-	public void mobileNumberIsTenDigitNumberOnly() {
-		assertTrue(validator.validate("9823014600"));
-		assertFalse(validator.validate("123456789"));
-		assertFalse(validator.validate("n0tANumb3r"));
-	}
+	/*
+	 * @Test public void mobileNumberIsTenDigitNumberOnly() {
+	 * assertTrue(validator.validate("9823014600"));
+	 * assertFalse(validator.validate("123456789"));
+	 * assertFalse(validator.validate("n0tANumb3r")); }
+	 */
 
 }
