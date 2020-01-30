@@ -22,22 +22,15 @@ public class CSVReader {
 		if (!CSV.equals(fileExtension)) {
 			throw new UnsupportedOperationException("Can read only CSV files");
 		}
-//		try {
 		BookingBuilder bookingBuilder = Booking.getBuilderInstance();
 		List<Booking> bookingInfo = new ArrayList<Booking>();
 		Files.lines(Paths.get(fileName)).forEach(line -> {
-			bookingInfo.add(buildInfo(bookingBuilder, line));
+			if (!"".equals(line)) {
+				bookingInfo.add(buildInfo(bookingBuilder, line));
+			}
 		});
 
-		/*
-		 * Scanner scanner = new Scanner(new File(fileName)); while(scanner.hasNext()) {
-		 * String line = scanner.nextLine(); bookingInfo.add(buildInfo(bookingBuilder,
-		 * line)); }
-		 */
 		return bookingInfo;
-//		} catch (IOException e) {
-//			return new ArrayList<Booking>();
-//		}
 	}
 
 	private Booking buildInfo(BookingBuilder bookingBuilder, String line) {

@@ -57,8 +57,8 @@ public class CSVReaderTest {
 	}
 
 	private List<String> buildBookingInfo() {
-		return Arrays.asList("Abhishek,Kumar,ABC123,F,2019-07-31,2,2019-05-21,abhishek@zzz.com,9876543210,Economy",
-				"Monin,Sankar,PQ234,C,2019-08-30,2,2019-05-22,monin@zzz.com,9876543211,Economy");
+		return Arrays.asList("Abhishek,Kumar,ABC123,F,2019-07-31,2,2019-05-21,abhishek@zzz.com,9876543210,ECONOMY",
+				"Monin,Sankar,PQ234,C,2019-08-30,2,2019-05-22,monin@zzz.com,9876543211,ECONOMY");
 	}
 
 }
