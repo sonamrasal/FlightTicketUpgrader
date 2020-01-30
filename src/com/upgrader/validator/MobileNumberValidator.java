@@ -1,18 +1,14 @@
 package com.upgrader.validator;
 
-public class MobileNumberValidator /* implements Validator */ {
+import com.updgrader.booking.Booking;
 
-	/*
-	 * @Override public boolean validate(String mobileNumber) { return
-	 * isNumeric(mobileNumber) && isValidLength(mobileNumber); }
-	 */
+public class MobileNumberValidator implements Validator {
 
-	public boolean isNumeric(String mobileNumber) {
-		return mobileNumber.matches("^[0-9]*$");
-	}
-
-	public boolean isValidLength(String mobileNumber) {
-		return mobileNumber.length() == 10;
+	@Override
+	public void validate(Booking booking) throws ValidationException {
+		if(!booking.isMobileNumberValid()) {
+			throw new ValidationException("Mobile number invalid");
+		}
 	}
 
 }

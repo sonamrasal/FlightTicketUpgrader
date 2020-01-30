@@ -1,4 +1,4 @@
-package com.upgrader.main;
+package com.updgrader.booking;
 
 public class PNR {
 
@@ -11,5 +11,9 @@ public class PNR {
 	@Override
 	public String toString() {
 		return value;
+	}
+
+	public boolean isValid() {
+		return value.length() == 6 && value.matches("^[a-zA-Z0-9]*$");
 	}
 }

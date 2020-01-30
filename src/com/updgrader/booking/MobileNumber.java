@@ -1,4 +1,4 @@
-package com.upgrader.main;
+package com.updgrader.booking;
 
 public class MobileNumber {
 
@@ -11,6 +11,10 @@ public class MobileNumber {
 	@Override
 	public String toString() {
 		return value;
+	}
+
+	public boolean isValid() {
+		return value.matches("^[0-9]*$") && value.length() == 10;
 	}
 
 }

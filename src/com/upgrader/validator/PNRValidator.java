@@ -1,20 +1,14 @@
 package com.upgrader.validator;
 
-import com.upgrader.main.Booking;
+import com.updgrader.booking.Booking;
 
-public class PNRValidator /* implements Validator */ {
+public class PNRValidator implements Validator {
 
-	public boolean isValidLength(String pnr) {
-		return pnr.length() == 6;
+	@Override
+	public void validate(Booking booking) throws ValidationException {
+		if(!booking.isPNRValid()) {
+			throw new ValidationException("PNR Invalid");
+		}
 	}
-
-	public boolean isAplhanumeric(String pnr) {
-		return pnr.matches("^[a-zA-Z0-9]*$");
-	}
-
-	/*
-	 * @Override public boolean validate(Booking booking) { return
-	 * isValidLength(pnr) && isAplhanumeric(pnr); }
-	 */
 
 }

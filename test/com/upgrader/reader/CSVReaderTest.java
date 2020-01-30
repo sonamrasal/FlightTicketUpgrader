@@ -12,11 +12,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.upgrader.main.Booking;
+import com.updgrader.booking.Booking;
 
 public class CSVReaderTest {
 
-	private CSVReader reader = new CSVReader();
+	private Reader reader = new CSVReader();
 
 	@Test(expected = FileNotFoundException.class)
 	public void cannotReadNullFiles() throws IOException {
@@ -35,25 +35,17 @@ public class CSVReaderTest {
 
 	@Test
 	public void readingEmptyFileProducesNoInformation() throws IOException {
-		try {
-			List<Booking> bookingInfo = reader.read("C:\\emptyFile.csv");
-			assertEquals(0, bookingInfo.size());
-		} catch (FileNotFoundException e) {
-			fail("Valid file path provided - should not produce exception");
-		}
+		List<Booking> bookingInfo = reader.read("C:\\emptyFile.csv");
+		assertEquals(0, bookingInfo.size());
 	}
 
 	@Test
 	public void readInputDataFileToProduceBookingInfo() throws IOException {
-		try {
-			List<Booking> bookingInfo = reader.read("C:\\sampleData.csv");
-			assertNotNull(bookingInfo);
-			assertEquals(2, bookingInfo.size());
-			List<String> expectedBookingInfo = buildBookingInfo();
-			bookingInfo.stream().forEach(booking -> assertTrue(expectedBookingInfo.contains(booking.toString())));
-		} catch (FileNotFoundException e) {
-			fail("Valid file path provided - should not produce exception");
-		}
+		List<Booking> bookingInfo = reader.read("C:\\sampleData.csv");
+		assertNotNull(bookingInfo);
+		assertEquals(2, bookingInfo.size());
+		List<String> expectedBookingInfo = buildBookingInfo();
+		bookingInfo.stream().forEach(booking -> assertTrue(expectedBookingInfo.contains(booking.toString())));
 	}
 
 	private List<String> buildBookingInfo() {

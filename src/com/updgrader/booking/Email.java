@@ -1,4 +1,4 @@
-package com.upgrader.main;
+package com.updgrader.booking;
 
 public class Email {
 

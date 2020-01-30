@@ -1,9 +1,9 @@
 package com.upgrader.validator;
 
-import com.upgrader.main.Booking;
+import com.updgrader.booking.Booking;
 
 public interface Validator {
 
-	boolean validate(Booking booking);
+	void validate(Booking booking) throws ValidationException;
 
 }

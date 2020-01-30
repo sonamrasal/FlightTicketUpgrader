@@ -7,13 +7,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.upgrader.main.Booking;
-import com.upgrader.main.Booking.BookingBuilder;
+import com.updgrader.booking.Booking;
+import com.updgrader.booking.Booking.BookingBuilder;
 
-public class CSVReader {
+public class CSVReader implements Reader {
 
 	private static final String CSV = ".csv";
 
+	@Override
 	public List<Booking> read(String fileName) throws IOException {
 		if (null == fileName) {
 			throw new FileNotFoundException("Cannot read null file");

@@ -1,4 +1,4 @@
-package com.upgrader.main;
+package com.updgrader.booking;
 
 public class Booking {
 
@@ -108,5 +108,13 @@ public class Booking {
 				+ numberOfPersons + "," + bookingDate + "," + email.toString() + "," + mobile.toString() + ","
 				+ cabin.toString();
 
+	}
+
+	public boolean isMobileNumberValid() {
+		return mobile.isValid();
+	}
+
+	public boolean isPNRValid() {
+		return pnr.isValid();
 	}
 }
