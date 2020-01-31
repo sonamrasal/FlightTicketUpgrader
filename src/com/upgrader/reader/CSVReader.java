@@ -27,25 +27,18 @@ public class CSVReader implements Reader {
 		BookingBuilder bookingBuilder = Booking.getBuilderInstance();
 		List<Booking> bookingInfo = new ArrayList<Booking>();
 		Files.lines(Paths.get(fileName)).forEach(line -> {
-			if (!"".equals(line)) {
-				bookingInfo.add(buildInfo(bookingBuilder, line));
-			}
+			bookingInfo.add(buildInfo(bookingBuilder, line));
 		});
 
 		return bookingInfo;
 	}
 
 	private Booking buildInfo(BookingBuilder bookingBuilder, String line) {
-		line = sanitize(line);
 		String[] information = line.split(",");
 		return bookingBuilder.withFirstName(information[0]).withLastName(information[1]).withPNR(information[2])
 				.withFareClass(information[3]).withTravelDate(information[4]).withPersons(information[5])
 				.withBookingDate(information[6]).withEmail(information[7]).withMobileNumber(information[8])
 				.withCabin(information[9]).build();
-	}
-
-	private String sanitize(String line) {
-		return line.replaceAll("[\"]", "");
 	}
 
 }

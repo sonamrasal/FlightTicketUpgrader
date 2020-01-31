@@ -35,13 +35,13 @@ public class CSVReaderTest {
 
 	@Test
 	public void readingEmptyFileProducesNoInformation() throws IOException {
-		List<Booking> bookingInfo = reader.read("C:\\emptyFile.csv");
+		List<Booking> bookingInfo = reader.read("testData\\reader\\emptyFile.csv");
 		assertEquals(0, bookingInfo.size());
 	}
 
 	@Test
 	public void readInputDataFileToProduceBookingInfo() throws IOException {
-		List<Booking> bookingInfo = reader.read("C:\\sampleData.csv");
+		List<Booking> bookingInfo = reader.read("testData\\reader\\sampleData.csv");
 		assertNotNull(bookingInfo);
 		assertEquals(2, bookingInfo.size());
 		List<String> expectedBookingInfo = buildBookingInfo();
@@ -49,8 +49,8 @@ public class CSVReaderTest {
 	}
 
 	private List<String> buildBookingInfo() {
-		return Arrays.asList("Abhishek,Kumar,ABC123,F,2019-07-31,2,2019-05-21,abhishek@zzz.com,9876543210,ECONOMY",
-				"Monin,Sankar,PQ234,C,2019-08-30,2,2019-05-22,monin@zzz.com,9876543211,ECONOMY");
+		return Arrays.asList("Abhishek,Kumar,ABC123,F,2019-07-31,2,2019-05-21,abhishek@zzz.com,9876543210,Economy",
+				"Monin,Sankar,PQ234,C,2019-08-30,2,2019-05-22,monin@zzz.com,9876543211,Economy");
 	}
 
 }
