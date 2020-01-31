@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.upgrader.reader.CSVReader;
@@ -16,7 +17,8 @@ public class FlightInfoProcessorTest {
 	@Test
 	public void bookingMadeWithInvalidPNR() throws IOException {
 		FlightInfoProcessor flightInfoProcessor = new FlightInfoProcessor(new CSVReader(), new PNRValidator());
-		List<ProcessingInformation> result = flightInfoProcessor.processBookingInformation("C:\\faultyPNRBooking.csv");
+		List<ProcessingInformation> result = flightInfoProcessor
+				.processBookingInformation("testData\\main\\faultyPNRBooking.csv");
 		assertNotNull(result);
 		assertEquals(1, result.size());
 		assertTrue("Monin,Sankar,PQ234,C,2019-08-30,2,2019-05-22,monin@zzz.com,9876543211,Economy,PNR Invalid"
@@ -27,14 +29,14 @@ public class FlightInfoProcessorTest {
 	public void bookingMadeWithInvalidEmail() throws IOException {
 		FlightInfoProcessor flightInfoProcessor = new FlightInfoProcessor(new CSVReader(), new EmailValidator());
 		List<ProcessingInformation> result = flightInfoProcessor
-				.processBookingInformation("C:\\faultyEmailBooking.csv");
+				.processBookingInformation("testData\\main\\faultyEmailBooking.csv");
 		assertNotNull(result);
 		assertEquals(1, result.size());
 		assertTrue("Radhika,Suresh,ZZZ345,T,2019-05-31,4,2019-05-21,radhika@zzz,9876543212,Business,Email Invalid"
 				.equals(result.get(0).toString()));
 	}
 
-	@Test
+	@Ignore
 	public void allBookingsAreInvalid() {
 
 	}
@@ -43,7 +45,7 @@ public class FlightInfoProcessorTest {
 	public void allBookingsAreValid() throws IOException {
 		FlightInfoProcessor flightInfoProcessor = new FlightInfoProcessor(new CSVReader(), new EmailValidator());
 		List<ProcessingInformation> result = flightInfoProcessor
-				.processBookingInformation("C:\\allValidBookings.csv");
+				.processBookingInformation("testData\\main\\allValidBookings.csv");
 		assertNotNull(result);
 		assertEquals(3, result.size());
 		assertTrue("Abhishek,Kumar,ABC123,F,2019-07-31,2,2019-05-21,abhishek@zzz.com,9876543210,Economy,OFFER_30"
