@@ -27,9 +27,9 @@ public class FlightInfoProcessor {
 		bookingInformation.stream().forEach(booking -> {
 			try {
 				validator.validate(booking);
-				processingInformation.add(new ValidBooking(booking, Discounts.applyDiscountTo(booking)));
+				processingInformation.add(new SuccessfulProcessing(booking, Discounts.applyDiscountTo(booking)));
 			} catch (ValidationException e) {
-				processingInformation.add(new FaultyBooking(booking, e.toString()));
+				processingInformation.add(new ProcessingFailure(booking, e.toString()));
 			}
 		});
 		return processingInformation;

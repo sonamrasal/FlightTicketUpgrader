@@ -2,12 +2,12 @@ package com.upgrader.main;
 
 import com.updgrader.booking.Booking;
 
-public class ValidBooking implements ProcessingInformation {
+public class SuccessfulProcessing implements ProcessingInformation {
 
 	private Booking booking;
 	private String offerCode;
 
-	public ValidBooking(Booking booking, String offerCode) {
+	public SuccessfulProcessing(Booking booking, String offerCode) {
 		this.booking = booking;
 		this.offerCode = offerCode;
 	}

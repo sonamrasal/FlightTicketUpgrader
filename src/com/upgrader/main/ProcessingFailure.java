@@ -2,12 +2,12 @@ package com.upgrader.main;
 
 import com.updgrader.booking.Booking;
 
-public class FaultyBooking implements ProcessingInformation {
+public class ProcessingFailure implements ProcessingInformation {
 
 	private final Booking booking;
 	private final String cause;
 
-	public FaultyBooking(Booking booking, String cause) {
+	public ProcessingFailure(Booking booking, String cause) {
 		this.booking = booking;
 		this.cause = cause;
 	}
