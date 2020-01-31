@@ -29,7 +29,6 @@ public class CSVReader implements Reader {
 		Files.lines(Paths.get(fileName)).forEach(line -> {
 			bookingInfo.add(buildInfo(bookingBuilder, line));
 		});
-
 		return bookingInfo;
 	}
 
