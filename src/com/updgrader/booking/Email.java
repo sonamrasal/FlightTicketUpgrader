@@ -13,4 +13,8 @@ public class Email {
 		return emailAddress;
 	}
 
+	public boolean isValid() {
+		return emailAddress.matches("^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$");
+	}
+
 }
