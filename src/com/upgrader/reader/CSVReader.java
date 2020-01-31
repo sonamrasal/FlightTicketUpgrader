@@ -28,18 +28,14 @@ public class CSVReader implements Reader {
 		List<Booking> bookingInfo = new ArrayList<Booking>();
 		Files.lines(Paths.get(fileName)).forEach(line -> {
 			if (!"".equals(line)) {
-				try {
-					bookingInfo.add(buildInfo(bookingBuilder, line));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
+				bookingInfo.add(buildInfo(bookingBuilder, line));
 			}
 		});
 
 		return bookingInfo;
 	}
 
-	private Booking buildInfo(BookingBuilder bookingBuilder, String line) throws ParseException {
+	private Booking buildInfo(BookingBuilder bookingBuilder, String line) {
 		line = sanitize(line);
 		String[] information = line.split(",");
 		return bookingBuilder.withFirstName(information[0]).withLastName(information[1]).withPNR(information[2])

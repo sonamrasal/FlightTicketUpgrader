@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.stream.Stream;
 
+import com.upgrader.main.discount.FareRange;
+
 public class Booking {
 
 	private String firstName;
@@ -133,5 +135,9 @@ public class Booking {
 
 	public boolean isCabinValid() {
 		return !(Stream.of(Cabin.values()).noneMatch(value -> value.isThis(this.cabin)));
+	}
+
+	public boolean isFareWithin(FareRange range) {
+		return range.contains(this.fare);
 	}
 }
