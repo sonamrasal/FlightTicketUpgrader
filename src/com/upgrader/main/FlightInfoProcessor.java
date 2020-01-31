@@ -9,14 +9,14 @@ import com.upgrader.reader.Reader;
 import com.upgrader.validator.ValidationException;
 import com.upgrader.validator.Validator;
 
-public class FlightUpgrader {
+public class FlightInfoProcessor {
 	
 	private Reader reader;
 	private Validator validator;
 	List<Booking> processedBookings;
 	List<Booking> faultyBookings;
-
-	public FlightUpgrader(Reader reader, Validator validator) {
+	
+	public FlightInfoProcessor(Reader reader, Validator validator) {
 		this.reader = reader;
 		this.validator = validator;
 		processedBookings = new ArrayList<Booking>();
@@ -32,6 +32,7 @@ public class FlightUpgrader {
 			} catch (ValidationException e) {
 				faultyBookings.add(booking);
 			}
+			
 		});
 	}
 }

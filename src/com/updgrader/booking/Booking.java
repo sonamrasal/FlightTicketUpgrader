@@ -1,20 +1,25 @@
 package com.updgrader.booking;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.stream.Stream;
+
 public class Booking {
 
 	private String firstName;
 	private String lastName;
 	private PNR pnr;
-	private Fare fare;
+	private FareClass fare;
 	private String travelDate;
-	private int numberOfPersons;
+	private String numberOfPersons;
 	private String bookingDate;
 	private Email email;
 	private MobileNumber mobile;
-	private Cabin cabin;
+	private String cabin;
 
-	private Booking(String firstName, String lastName, PNR pnr, Fare fare, String travelDate, int numberOfPersons,
-			String bookingDate, Email email, MobileNumber mobile, Cabin cabin) {
+	private Booking(String firstName, String lastName, PNR pnr, FareClass fare, String travelDate,
+			String numberOfPersons, String bookingDate, Email email, MobileNumber mobile, String cabin) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.pnr = pnr;
@@ -32,13 +37,13 @@ public class Booking {
 		private String firstName;
 		private String lastName;
 		private PNR pnr;
-		private Fare fare;
+		private FareClass fareClass;
 		private String travelDate;
-		private Integer numberOfPersons;
+		private String numberOfPersons;
 		private String bookingDate;
 		private Email email;
 		private MobileNumber mobile;
-		private Cabin cabin;
+		private String cabin;
 
 		public BookingBuilder withFirstName(String firstName) {
 			this.firstName = firstName;
@@ -55,18 +60,18 @@ public class Booking {
 			return this;
 		}
 
-		public BookingBuilder withFare(String fare) {
-			this.fare = Fare.valueOf(fare);
+		public BookingBuilder withFareClass(String fareClass) {
+			this.fareClass = FareClass.valueOf(fareClass);
 			return this;
 		}
 
-		public BookingBuilder forTravelDate(String travelDate) {
+		public BookingBuilder withTravelDate(String travelDate) {
 			this.travelDate = travelDate;
 			return this;
 		}
 
-		public BookingBuilder forPersons(String numberOfPersons) {
-			this.numberOfPersons = Integer.valueOf(numberOfPersons);
+		public BookingBuilder withPersons(String numberOfPersons) {
+			this.numberOfPersons = numberOfPersons;
 			return this;
 		}
 
@@ -86,12 +91,12 @@ public class Booking {
 		}
 
 		public BookingBuilder withCabin(String cabin) {
-			this.cabin = Cabin.valueOf(cabin.toUpperCase());
+			this.cabin = cabin;
 			return this;
 		}
 
 		public Booking build() {
-			Booking booking = new Booking(firstName, lastName, pnr, fare, travelDate, numberOfPersons, bookingDate,
+			Booking booking = new Booking(firstName, lastName, pnr, fareClass, travelDate, numberOfPersons, bookingDate,
 					email, mobile, cabin);
 			return booking;
 		}
@@ -105,8 +110,7 @@ public class Booking {
 	@Override
 	public String toString() {
 		return firstName + "," + lastName + "," + pnr.toString() + "," + fare.toString() + "," + travelDate + ","
-				+ numberOfPersons + "," + bookingDate + "," + email.toString() + "," + mobile.toString() + ","
-				+ cabin.toString();
+				+ numberOfPersons + "," + bookingDate + "," + email.toString() + "," + mobile.toString() + "," + cabin;
 
 	}
 
@@ -116,5 +120,18 @@ public class Booking {
 
 	public boolean isPNRValid() {
 		return pnr.isValid();
+	}
+
+	public boolean isEmailValid() {
+		return email.isValid();
+	}
+
+	public boolean isBookingInAdvanceOfTravel() throws ParseException {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("YYYY-mm-dd");
+		return dateFormatter.parse(bookingDate).before(dateFormatter.parse(travelDate));
+	}
+
+	public boolean isCabinValid() {
+		return !(Stream.of(Cabin.values()).noneMatch(value -> value.isThis(this.cabin)));
 	}
 }

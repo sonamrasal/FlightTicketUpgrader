@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,18 +28,22 @@ public class CSVReader implements Reader {
 		List<Booking> bookingInfo = new ArrayList<Booking>();
 		Files.lines(Paths.get(fileName)).forEach(line -> {
 			if (!"".equals(line)) {
-				bookingInfo.add(buildInfo(bookingBuilder, line));
+				try {
+					bookingInfo.add(buildInfo(bookingBuilder, line));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 
 		return bookingInfo;
 	}
 
-	private Booking buildInfo(BookingBuilder bookingBuilder, String line) {
+	private Booking buildInfo(BookingBuilder bookingBuilder, String line) throws ParseException {
 		line = sanitize(line);
 		String[] information = line.split(",");
 		return bookingBuilder.withFirstName(information[0]).withLastName(information[1]).withPNR(information[2])
-				.withFare(information[3]).forTravelDate(information[4]).forPersons(information[5])
+				.withFareClass(information[3]).withTravelDate(information[4]).withPersons(information[5])
 				.withBookingDate(information[6]).withEmail(information[7]).withMobileNumber(information[8])
 				.withCabin(information[9]).build();
 	}
