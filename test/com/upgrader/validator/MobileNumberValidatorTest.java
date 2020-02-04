@@ -4,27 +4,64 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.updgrader.booking.Booking;
+
 public class MobileNumberValidatorTest {
 
 	private MobileNumberValidator validator = new MobileNumberValidator();
+	private Booking.BookingBuilder builder = Booking.getBuilderInstance();
 
-	/*
-	 * @Test public void mobileNumberLengthIsTen() {
-	 * assertFalse(validator.isValidLength("123456789"));
-	 * assertTrue(validator.isValidLength("1234567890"));
-	 * assertTrue(validator.isValidLength("9823014600")); }
-	 * 
-	 * @Test public void mobileNumberIsDigitsOnly() {
-	 * assertFalse(validator.isNumeric("notAMobile"));
-	 * assertFalse(validator.isNumeric("n0tANumb3r"));
-	 * assertTrue(validator.isNumeric("9823014600")); }
-	 */
+	@Test
+	public void mobileNumberLengthIsTen() {
+		try {
+			validator.validate(builder.withMobileNumber("123456789").build());
+			fail("Mobile number invalid - exception expected");
+		} catch (ValidationException e) {
+		}
+		try {
+			validator.validate(builder.withMobileNumber("1234567890").build());
+			validator.validate(builder.withMobileNumber("9823014600").build());
+		} catch (ValidationException e) {
+			fail("Valid mobile number provided - excpetion should not be thrown");
+		}
+	}
+
+	@Test
+	public void mobileNumberIsDigitsOnly() {
+		try {
+			validator.validate(builder.withMobileNumber("notAMobile").build());
+			fail("Mobile number invalid - exception expected");
+		} catch (ValidationException e) {
+		}
+		try {
+			validator.validate(builder.withMobileNumber("n0tANumb3r").build());
+			fail("Mobile number invalid - exception expected");
+		} catch (ValidationException e) {
+		}
+		try {
+			validator.validate(builder.withMobileNumber("9823014600").build());
+		} catch (ValidationException e) {
+			fail("Valid mobile number provided - excpetion should not be thrown");
+		}
+	}
 	
-	/*
-	 * @Test public void mobileNumberIsTenDigitNumberOnly() {
-	 * assertTrue(validator.validate("9823014600"));
-	 * assertFalse(validator.validate("123456789"));
-	 * assertFalse(validator.validate("n0tANumb3r")); }
-	 */
-
+	@Test
+	public void mobileNumberIsTenDigitNumberOnly() {
+		try {
+			validator.validate(builder.withMobileNumber("123456789").build());
+			fail("Mobile number invalid - exception expected");
+		} catch (ValidationException e) {
+		}
+		try {
+			validator.validate(builder.withMobileNumber("n0tANumb3r").build());
+			fail("Mobile number invalid - exception expected");
+		} catch (ValidationException e) {
+		}
+		try {
+			validator.validate(builder.withMobileNumber("9823014600").build());
+		} catch (ValidationException e) {
+			fail("Valid mobile number provided - excpetion should not be thrown");
+		}
+	}
+	
 }
