@@ -18,10 +18,18 @@ public class MacroValidator implements Validator {
 
 	@Override
 	public void validate(Booking booking) throws ValidationException {
+		StringBuilder validationErrors = new StringBuilder();
 		Iterator<Validator> iterator = validators.iterator();
 		while (iterator.hasNext()) {
 			Validator validator = iterator.next();
-			validator.validate(booking);
+			try {
+				validator.validate(booking);
+			} catch (ValidationException e) {
+				validationErrors.append(e.toString());
+			}
+		}
+		if(validationErrors.length() > 0) {
+			throw new ValidationException(validationErrors.substring(0, validationErrors.length() - 1));
 		}
 	}
 
